@@ -1,0 +1,495 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "YouthOpp AI Mentor — Mock Prototype",
+    "description": "DEMO: Tüm fırsatlar kurgusal örnek verilerdir; gerçek ilan veya başvuru bağlantısı değildir. Profil kaydedilmez. Puanlar başarı olasılığı değildir.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Gethealth"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/opportunities/search": {
+      "post": {
+        "summary": "Profil için örnek fırsatları sırala",
+        "description": "DEMO: Tüm fırsatlar kurgusal örnek verilerdir; gerçek ilan veya başvuru bağlantısı değildir.",
+        "operationId": "searchOpportunities",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-openai-isConsequential": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "string",
+        "enum": [
+          "scholarship",
+          "internship",
+          "fellowship",
+          "other"
+        ],
+        "title": "Category"
+      },
+      "Education": {
+        "type": "string",
+        "enum": [
+          "high_school",
+          "undergraduate",
+          "graduate",
+          "doctoral",
+          "other"
+        ],
+        "title": "Education"
+      },
+      "Eligibility": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "min_age": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Age"
+          },
+          "max_age": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 120.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Age"
+          },
+          "countries": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Countries",
+            "description": "null: bilinmiyor; []: tüm ülkeler."
+          },
+          "education_levels": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Education"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Education Levels"
+          }
+        },
+        "type": "object",
+        "required": [
+          "description"
+        ],
+        "title": "Eligibility"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Opportunity": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "country": {
+            "type": "string",
+            "title": "Country",
+            "description": "Fırsatın hedef ülkesi; vatandaşlık şartı değildir."
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "deadline": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deadline"
+          },
+          "interests": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Interests"
+          },
+          "eligibility": {
+            "$ref": "#/components/schemas/Eligibility"
+          },
+          "source_url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Source Url"
+          },
+          "is_mock": {
+            "type": "boolean",
+            "title": "Is Mock",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "country",
+          "category",
+          "deadline",
+          "interests",
+          "eligibility",
+          "source_url"
+        ],
+        "title": "Opportunity"
+      },
+      "Profile": {
+        "properties": {
+          "age": {
+            "type": "integer",
+            "maximum": 120.0,
+            "minimum": 1.0,
+            "title": "Age"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z]{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "Vatandaşlık ülkesi; bilinmiyorsa boş bırakılır. İkametten çıkarılmaz."
+          },
+          "residence_country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z]{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Residence Country",
+            "description": "İkamet ülkesi; vatandaşlık şartını karşılamak için kullanılmaz."
+          },
+          "preferred_region": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "europe"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Region",
+            "description": "europe: uygulamanın belgelenmiş Avrupa hedef ülke listesi; AB ile aynı değildir. Uzaktan/belirsiz konumlar dahil edilmez."
+          },
+          "education": {
+            "$ref": "#/components/schemas/Education"
+          },
+          "interests": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Interests"
+          },
+          "opportunity_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Category"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Boş bırakılırsa tüm türler aranır."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "age",
+          "education",
+          "interests"
+        ],
+        "title": "Profile"
+      },
+      "Recommendation": {
+        "properties": {
+          "opportunity": {
+            "$ref": "#/components/schemas/Opportunity"
+          },
+          "score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "eligibility_status": {
+            "type": "string",
+            "title": "Eligibility Status"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          },
+          "mentor_message": {
+            "type": "string",
+            "title": "Mentor Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "opportunity",
+          "score",
+          "reasons",
+          "eligibility_status",
+          "warnings",
+          "mentor_message"
+        ],
+        "title": "Recommendation"
+      },
+      "SearchRequest": {
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 10
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "profile"
+        ],
+        "title": "SearchRequest",
+        "examples": [
+          {
+            "limit": 5,
+            "profile": {
+              "age": 22,
+              "country": "TR",
+              "education": "undergraduate",
+              "interests": [
+                "yapay zeka"
+              ],
+              "opportunity_type": "scholarship"
+            }
+          }
+        ]
+      },
+      "SearchResponse": {
+        "properties": {
+          "notice": {
+            "type": "string",
+            "title": "Notice"
+          },
+          "is_mock": {
+            "type": "boolean",
+            "title": "Is Mock"
+          },
+          "evaluated_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Evaluated On"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/Recommendation"
+            },
+            "type": "array",
+            "title": "Results"
+          }
+        },
+        "type": "object",
+        "required": [
+          "notice",
+          "is_mock",
+          "evaluated_on",
+          "total",
+          "results"
+        ],
+        "title": "SearchResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

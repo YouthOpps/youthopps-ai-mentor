@@ -1,0 +1,190 @@
+[
+  {
+    "id": "ai-scholarship",
+    "title": "ÖRNEK: Yapay Zeka Öğrenci Bursu",
+    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: ai, technology.",
+    "country": "DE",
+    "category": "scholarship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "ai",
+      "technology"
+    ],
+    "eligibility": {
+      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "min_age": 18,
+      "max_age": 30,
+      "countries": [
+        "TR"
+      ],
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/ai-scholarship",
+    "is_mock": true
+  },
+  {
+    "id": "climate-internship",
+    "title": "ÖRNEK: İklim Araştırma Stajı",
+    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: climate, research.",
+    "country": "NL",
+    "category": "internship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "climate",
+      "research"
+    ],
+    "eligibility": {
+      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "min_age": 18,
+      "max_age": 35,
+      "countries": [],
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/climate-internship",
+    "is_mock": true
+  },
+  {
+    "id": "research-fellowship",
+    "title": "ÖRNEK: Araştırmacı Fellowship",
+    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: ai, research.",
+    "country": "GB",
+    "category": "fellowship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "ai",
+      "research"
+    ],
+    "eligibility": {
+      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "min_age": 21,
+      "max_age": 50,
+      "countries": [],
+      "education_levels": [
+        "graduate",
+        "doctoral"
+      ]
+    },
+    "source_url": "https://example.org/mock/research-fellowship",
+    "is_mock": true
+  },
+  {
+    "id": "community-program",
+    "title": "ÖRNEK: Topluluk Eğitim Programı",
+    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: education, technology.",
+    "country": "TR",
+    "category": "other",
+    "deadline": "2099-12-31",
+    "interests": [
+      "education",
+      "technology"
+    ],
+    "eligibility": {
+      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "min_age": 16,
+      "max_age": 40,
+      "countries": [],
+      "education_levels": [
+        "high_school",
+        "undergraduate",
+        "other"
+      ]
+    },
+    "source_url": "https://example.org/mock/community-program",
+    "is_mock": true
+  },
+  {
+    "id": "unknown-internship",
+    "title": "ÖRNEK: Teknoloji Keşif Stajı",
+    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: technology, ai.",
+    "country": "Remote",
+    "category": "internship",
+    "deadline": null,
+    "interests": [
+      "technology",
+      "ai"
+    ],
+    "eligibility": {
+      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "min_age": null,
+      "max_age": null,
+      "countries": null,
+      "education_levels": null
+    },
+    "source_url": "https://example.org/mock/unknown-internship",
+    "is_mock": true
+  },
+  {
+    "id": "global-scholarship",
+    "title": "ÖRNEK: Küresel Eğitim Bursu",
+    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: education, ai.",
+    "country": "FR",
+    "category": "scholarship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "education",
+      "ai"
+    ],
+    "eligibility": {
+      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "min_age": 18,
+      "max_age": 35,
+      "countries": [],
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/global-scholarship",
+    "is_mock": true
+  },
+  {
+    "id": "software-internship-de",
+    "title": "ÖRNEK: Almanya Yazılım Geliştirme Stajı",
+    "description": "Bu senaryoyu test etmek için oluşturulmuş kurgusal teknoloji stajıdır. Gerçek bir ilan veya başvuru içermez.",
+    "country": "DE",
+    "category": "internship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "technology",
+      "ai"
+    ],
+    "eligibility": {
+      "description": "Kurgusal koşullar: 18–30 yaş, lisans öğrencisi, vatandaşlık ülkesi kısıtlaması yok. Vize ve çalışma izni hakkında bir iddia içermez.",
+      "min_age": 18,
+      "max_age": 30,
+      "countries": [],
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/software-internship-de",
+    "is_mock": true
+  },
+  {
+    "id": "software-internship-fr",
+    "title": "ÖRNEK: Fransa Web Geliştirme Stajı",
+    "description": "Bu senaryoyu test etmek için oluşturulmuş kurgusal teknoloji stajıdır. Gerçek bir ilan veya başvuru içermez.",
+    "country": "FR",
+    "category": "internship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "technology"
+    ],
+    "eligibility": {
+      "description": "Kurgusal koşullar: 18–30 yaş, lisans öğrencisi, vatandaşlık ülkesi kısıtlaması yok. Vize ve çalışma izni hakkında bir iddia içermez.",
+      "min_age": 18,
+      "max_age": 30,
+      "countries": [],
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/software-internship-fr",
+    "is_mock": true
+  }
+]
