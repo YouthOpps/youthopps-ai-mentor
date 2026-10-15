@@ -1,5 +1,7 @@
 # YouthOpp AI Mentor
 
+Developed by [Alperen](https://github.com/alperenyrmbs).
+
 A Python 3.11+ and FastAPI prototype that helps students discover opportunities
 and understand why they match their profile. It ranks scholarships, internships,
 fellowships, and other opportunities with simple, explainable rules and returns
