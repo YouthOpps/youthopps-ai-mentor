@@ -1,0 +1,15 @@
+# Deployment blueprint only. Applying it in Render creates a public service.
+services:
+  - type: web
+    name: youthopps-ai-mentor
+    runtime: python
+    repo: https://github.com/alperenyrmbs/youthopps-ai-mentor
+    branch: main
+    plan: free
+    autoDeployTrigger: "off"
+    buildCommand: python -m pip install -r requirements.txt && python -m pytest -q
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --no-access-log
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.14
