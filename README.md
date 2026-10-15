@@ -3,7 +3,7 @@
 A Python 3.11+ and FastAPI prototype that helps students discover opportunities
 and understand why they match their profile. It ranks scholarships, internships,
 fellowships, and other opportunities with simple, explainable rules and returns
-supportive mentor messages in Turkish.
+supportive mentor messages in English.
 
 **This prototype uses eight fictional mock opportunities only. It does not fetch,
 use, or redistribute real YouthOpps data.** Example source links point to
@@ -50,7 +50,7 @@ Routes:
 ## Example: a student looking for an internship in Europe
 
 This example represents a 22-year-old computer engineering undergraduate living
-in Türkiye. Citizenship is deliberately omitted: residence does not establish it.
+in Turkey. Citizenship is deliberately omitted: residence does not establish it.
 
 ```bash
 curl -sS -X POST http://127.0.0.1:8000/opportunities/search \
@@ -72,9 +72,9 @@ Expected fixture results while their demo deadlines have not passed:
 
 | Fictional opportunity | Destination | Score |
 | --- | --- | --- |
-| ÖRNEK: Almanya Yazılım Geliştirme Stajı | Germany | 100 |
-| ÖRNEK: Fransa Web Geliştirme Stajı | France | 100 |
-| ÖRNEK: İklim Araştırma Stajı | Netherlands | 60 |
+| MOCK: Software Development Internship in Germany | Germany | 100 |
+| MOCK: Web Development Internship in France | France | 100 |
+| MOCK: Climate Research Internship | Netherlands | 60 |
 
 The two technology internships match the student's interest, age, education, and
 selected type. The climate internship is a broader alternative with no direct
@@ -104,7 +104,7 @@ an empty list. Invalid input returns HTTP 422.
 | `limit` | Optional top-level integer, 1–50; default 10 |
 
 Country codes are uppercased and checked for a two-letter format, not against a
-complete ISO country list. Interest matching uses a small Turkish/English alias
+complete ISO country list. Interest matching uses a small English alias
 dictionary and exact tag overlap, rather than semantic search or an LLM.
 
 The Europe filter uses the explicit destination list in
@@ -149,7 +149,7 @@ app/
 tests/test_api.py              API and matching regression tests
 openapi.json                    Exported API contract
 requirements.txt                Pinned runtime and test dependencies
-PLAN.md                         Research and technical plan in Turkish
+PLAN.md                         Research and technical plan in English
 ```
 
 `OpportunityRepository` separates matching from data access. After reuse rights

@@ -3,14 +3,11 @@ from datetime import date
 from .models import Opportunity, Recommendation, SearchRequest
 
 
-# Küçük ve açık bir sözlük; bilinmeyen terimler tam eşleşmeyle değerlendirilir.
-ALIASES = {'yapay zeka': 'ai', 'artificial intelligence': 'ai',
-           'teknoloji': 'technology', 'eğitim': 'education',
-           'iklim': 'climate', 'araştırma': 'research',
-           'bilgisayar mühendisliği': 'technology', 'computer engineering': 'technology'}
+# Small, explicit alias map; other terms use exact matching.
+ALIASES = {'artificial intelligence': 'ai', 'computer engineering': 'technology'}
 
-# Prototipin açık hedef listesi: AB değildir; TR/RU gibi kıtalararası
-# ülkeler bu varsayılan filtrede yoktur. Yeni bölgeler ayrı politika ister.
+# Explicit prototype destination list, not EU membership. Transcontinental
+# countries such as TR/RU are excluded. New regions need their own policy.
 EUROPE_DESTINATIONS = frozenset(
     'AD AL AT BA BE BG BY CH CY CZ DE DK EE ES FI FR GB GR HR HU IE IS '
     'IT LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS SE SI SK SM UA VA XK'.split()
@@ -48,49 +45,49 @@ def recommend(items: list[Opportunity], request: SearchRequest, today: date) -> 
         score = 0
         reasons = []
         warnings = []
-        # 40 ilgi + 20 tür tercihi + 15 ülke + 15 eğitim + 10 yaş.
+        # 40 interests + 20 selected type + 15 citizenship + 15 education + 10 age.
         shared = sorted({canonical(x) for x in profile.interests} & {canonical(x) for x in item.interests})
         if shared:
             score += round(40 * len(shared) / len({canonical(x) for x in profile.interests}))
-            labels = {'technology': 'teknoloji', 'ai': 'yapay zeka', 'education': 'eğitim',
-                      'climate': 'iklim', 'research': 'araştırma'}
-            reasons.append('İlgi alanlarınla ortak konular: ' + ', '.join(labels.get(x, x) for x in shared) + '.')
+            labels = {'technology': 'technology', 'ai': 'artificial intelligence', 'education': 'education',
+                      'climate': 'climate', 'research': 'research'}
+            reasons.append('Topics that match your interests: ' + ', '.join(labels.get(x, x) for x in shared) + '.')
         else:
-            reasons.append('İlgi alanlarınla doğrudan eşleşme bulunmadı; bu daha genel bir alternatif.')
+            reasons.append('There is no direct interest match; this is a broader alternative.')
         if profile.opportunity_type:
             score += 20
-            reasons.append('Aradığın fırsat türüyle eşleşiyor.')
+            reasons.append('This matches the opportunity type you are looking for.')
         if rules.countries == []:
             score += 15
-            reasons.append('Örnek ilanda vatandaşlık ülkesi kısıtlaması yok.')
+            reasons.append('This mock opportunity has no citizenship country restriction.')
         elif rules.countries is not None and profile.country is not None:
             score += 15
-            reasons.append('Belirttiğin vatandaşlık ülkesi koşula uyuyor.')
+            reasons.append('Your stated citizenship meets the country requirement.')
         elif rules.countries:
-            warnings.append('Vatandaşlık ülken bilinmediği için ülke koşulu doğrulanamadı; ikamet yeterli değildir.')
+            warnings.append('The country requirement cannot be confirmed without your citizenship; residence is not sufficient.')
         else:
-            warnings.append('Vatandaşlık uygunluğu belirtilmemiş.')
+            warnings.append('Citizenship eligibility is not specified.')
         if profile.preferred_region == 'europe':
-            reasons.append('Fırsatın hedef ülkesi Avrupa tercihinle eşleşiyor.')
+            reasons.append('The destination matches your preference for Europe.')
         if rules.education_levels is not None:
             score += 15
-            reasons.append('Eğitim düzeyin belirtilen koşula uyuyor.')
+            reasons.append('Your education level meets the stated requirement.')
         else:
-            warnings.append('Eğitim koşulu belirtilmemiş.')
+            warnings.append('Education requirements are not specified.')
         if rules.min_age is not None and rules.max_age is not None:
             score += 10
-            reasons.append('Yaşın belirtilen aralıkta.')
+            reasons.append('Your age is within the stated range.')
         else:
-            warnings.append('Yaş koşulu tam belirtilmemiş.')
+            warnings.append('Age requirements are not fully specified.')
         if item.deadline is None:
-            warnings.append('Son başvuru tarihi bilinmiyor.')
+            warnings.append('The application deadline is unknown.')
         if not reasons:
-            reasons.append('Seçtiğin arama filtrelerine uyuyor; uygunluk bilgilerini kontrol etmelisin.')
-        message = ' '.join(reasons) + ' Bu örnek fırsat, seçeneklerini keşfetmen için bir başlangıç olabilir.'
+            reasons.append('This matches your search filters; please check the eligibility details.')
+        message = ' '.join(reasons) + ' This mock opportunity could be a starting point for exploring your options.'
         results.append(Recommendation(
             opportunity=item, score=score, reasons=reasons,
             eligibility_status='needs_review' if warnings else 'matches_stated_rules',
             warnings=warnings,
-            mentor_message=message + (' Eksik koşulları doğrulamadan uygun olduğunu varsayma.' if warnings else ' Gerçek başvurularda tüm koşulları kaynakta doğrula.'),
+            mentor_message=message + (' Check the missing requirements before assuming you are eligible.' if warnings else ' For real applications, verify all requirements with the original source.'),
         ))
     return sorted(results, key=lambda x: (-x.score, x.opportunity.deadline or date.max, x.opportunity.id))

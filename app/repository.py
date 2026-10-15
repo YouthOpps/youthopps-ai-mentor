@@ -1,4 +1,4 @@
-"""Veri erişim sınırı: gelecekte izinli JSON adaptörü aynı arayüzü uygular."""
+"""Data access boundary: a future permitted JSON adapter implements this interface."""
 import json
 from pathlib import Path
 from typing import Protocol
@@ -18,5 +18,5 @@ class MockRepository:
         rows = json.loads(self.path.read_text(encoding='utf-8'))
         opportunities = [Opportunity.model_validate(row) for row in rows]
         if any(not item.is_mock for item in opportunities):
-            raise ValueError('MockRepository yalnızca örnek veri kabul eder.')
+            raise ValueError('MockRepository only accepts mock records.')
         return opportunities

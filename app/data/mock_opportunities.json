@@ -1,8 +1,8 @@
 [
   {
     "id": "ai-scholarship",
-    "title": "ÖRNEK: Yapay Zeka Öğrenci Bursu",
-    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: ai, technology.",
+    "title": "MOCK: AI Student Scholarship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: ai, technology.",
     "country": "DE",
     "category": "scholarship",
     "deadline": "2099-12-31",
@@ -11,7 +11,7 @@
       "technology"
     ],
     "eligibility": {
-      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
       "min_age": 18,
       "max_age": 30,
       "countries": [
@@ -26,8 +26,8 @@
   },
   {
     "id": "climate-internship",
-    "title": "ÖRNEK: İklim Araştırma Stajı",
-    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: climate, research.",
+    "title": "MOCK: Climate Research Internship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: climate, research.",
     "country": "NL",
     "category": "internship",
     "deadline": "2099-12-31",
@@ -36,7 +36,7 @@
       "research"
     ],
     "eligibility": {
-      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
       "min_age": 18,
       "max_age": 35,
       "countries": [],
@@ -50,8 +50,8 @@
   },
   {
     "id": "research-fellowship",
-    "title": "ÖRNEK: Araştırmacı Fellowship",
-    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: ai, research.",
+    "title": "MOCK: Research Fellowship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: ai, research.",
     "country": "GB",
     "category": "fellowship",
     "deadline": "2099-12-31",
@@ -60,7 +60,7 @@
       "research"
     ],
     "eligibility": {
-      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
       "min_age": 21,
       "max_age": 50,
       "countries": [],
@@ -74,8 +74,8 @@
   },
   {
     "id": "community-program",
-    "title": "ÖRNEK: Topluluk Eğitim Programı",
-    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: education, technology.",
+    "title": "MOCK: Community Education Program",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: education, technology.",
     "country": "TR",
     "category": "other",
     "deadline": "2099-12-31",
@@ -84,7 +84,7 @@
       "technology"
     ],
     "eligibility": {
-      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
       "min_age": 16,
       "max_age": 40,
       "countries": [],
@@ -99,8 +99,8 @@
   },
   {
     "id": "unknown-internship",
-    "title": "ÖRNEK: Teknoloji Keşif Stajı",
-    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: technology, ai.",
+    "title": "MOCK: Technology Discovery Internship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: technology, ai.",
     "country": "Remote",
     "category": "internship",
     "deadline": null,
@@ -109,7 +109,7 @@
       "ai"
     ],
     "eligibility": {
-      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
       "min_age": null,
       "max_age": null,
       "countries": null,
@@ -120,8 +120,8 @@
   },
   {
     "id": "global-scholarship",
-    "title": "ÖRNEK: Küresel Eğitim Bursu",
-    "description": "Bu tamamen kurgusal bir demo fırsatıdır; gerçek bir kurum veya başvuru içermez. Konular: education, ai.",
+    "title": "MOCK: Global Education Scholarship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: education, ai.",
     "country": "FR",
     "category": "scholarship",
     "deadline": "2099-12-31",
@@ -130,7 +130,7 @@
       "ai"
     ],
     "eligibility": {
-      "description": "Yalnızca prototip eşleştirmesini göstermek için kurgulanmış koşullar.",
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
       "min_age": 18,
       "max_age": 35,
       "countries": [],
@@ -144,8 +144,8 @@
   },
   {
     "id": "software-internship-de",
-    "title": "ÖRNEK: Almanya Yazılım Geliştirme Stajı",
-    "description": "Bu senaryoyu test etmek için oluşturulmuş kurgusal teknoloji stajıdır. Gerçek bir ilan veya başvuru içermez.",
+    "title": "MOCK: Software Development Internship in Germany",
+    "description": "A fictional technology internship created to test the student scenario. This is not a real listing or application.",
     "country": "DE",
     "category": "internship",
     "deadline": "2099-12-31",
@@ -154,7 +154,7 @@
       "ai"
     ],
     "eligibility": {
-      "description": "Kurgusal koşullar: 18–30 yaş, lisans öğrencisi, vatandaşlık ülkesi kısıtlaması yok. Vize ve çalışma izni hakkında bir iddia içermez.",
+      "description": "Fictional requirements: ages 18-30, undergraduate student, no citizenship country restriction. No claim is made about visas or work authorization.",
       "min_age": 18,
       "max_age": 30,
       "countries": [],
@@ -167,8 +167,8 @@
   },
   {
     "id": "software-internship-fr",
-    "title": "ÖRNEK: Fransa Web Geliştirme Stajı",
-    "description": "Bu senaryoyu test etmek için oluşturulmuş kurgusal teknoloji stajıdır. Gerçek bir ilan veya başvuru içermez.",
+    "title": "MOCK: Web Development Internship in France",
+    "description": "A fictional technology internship created to test the student scenario. This is not a real listing or application.",
     "country": "FR",
     "category": "internship",
     "deadline": "2099-12-31",
@@ -176,7 +176,7 @@
       "technology"
     ],
     "eligibility": {
-      "description": "Kurgusal koşullar: 18–30 yaş, lisans öğrencisi, vatandaşlık ülkesi kısıtlaması yok. Vize ve çalışma izni hakkında bir iddia içermez.",
+      "description": "Fictional requirements: ages 18-30, undergraduate student, no citizenship country restriction. No claim is made about visas or work authorization.",
       "min_age": 18,
       "max_age": 30,
       "countries": [],

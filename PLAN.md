@@ -1,294 +1,296 @@
-# YouthOpp AI Mentor — Araştırma ve teknik plan
+# YouthOpp AI Mentor - Research and Technical Plan
 
-Durum: Araştırma planı korundu; kullanıcı onayıyla mock verili ilk prototip geliştirildi.
-Araştırma tarihi: 15 Ekim 2026.
-Hedef kaynak: https://www.youthopps.org/
+Status: Research findings retained; the first mock-data prototype was implemented
+with user approval. The project content and API messages are now in English.
+Research date: October 15, 2026.
+Target source: https://www.youthopps.org/
 
-## 1. Güncel araştırma sonucu ve erişim
+## 1. Research findings and access
 
-Kullanıcının ağ izni değişikliğinden sonra yeniden test edildi. Hem
-https://youthopps.org/ hem https://www.youthopps.org/ ana sayfası HTTP 200
-verdi. Alt sayfalar www üzerinden HTTP 200 ile incelendi; çıplak alan
-adındaki alt sayfa denemelerinde HTTP 403 alındı. Bu farkın nedeni
-belirlenmedi; sitenin genel olarak erişilemez olduğu sonucu çıkarılmadı.
-HTML canonical adresleri çıplak alan adını gösteriyor.
+Access was tested again after the user changed the network permissions. Both
+https://youthopps.org/ and https://www.youthopps.org/ returned HTTP 200 for the
+homepage. Subpages were inspected successfully through the www host. Subpage
+requests to the bare domain returned HTTP 403; the reason for the difference was
+not established. This does not mean the site is generally unavailable. HTML
+canonical links refer to the bare domain.
 
-Önceki proxy engeli güncel araştırmayı artık durdurmuyor. Ana sayfa,
-kategori ve detay HTML'leri, mimari belgeleri, kaynak politikası,
-robots.txt, sitemap, istemci JavaScript'i ve bir statik JSON indeksi
-okundu. Tarayıcıda görsel/etkileşimli test yapılmadı; listeleme davranışı
-HTML, JavaScript ve yayımlanmış belgeler üzerinden araştırıldı.
+The earlier proxy restriction no longer blocked this research. The homepage,
+category and detail HTML, architecture documentation, source policy, robots.txt,
+sitemap, client JavaScript, and a static JSON index were read. No visual or
+interactive browser test was performed; listing behavior was investigated through
+HTML, JavaScript, and published documentation.
 
-Site kendini “YouthOpp / Open opportunity index” olarak tanımlıyor.
-Youth Opportunities (youthop.com), bu indeksin kaynaklarından yalnızca
-biri; youthopps.org ile aynı site kabul edilmemeli. Ayrıca doğrudan kurum
-kaynakları ve başka derleyiciler var. Site kayıtları bağımsız keşif
-kayıtlarıdır; başvuru ve uygunluk için yayıncıya yönlendirir.
+The site calls itself "YouthOpp / Open opportunity index." Youth Opportunities
+(youthop.com) is only one source in that index, not the same site as youthopps.org.
+Direct institutional sources and other aggregators are also included. Listings
+are independent discovery records that refer users to publishers for applications
+and authoritative eligibility information.
 
-## 2. Fırsatlar nasıl listeleniyor?
+## 2. How opportunities are listed
 
-Ana sayfada araştırma anında **7.663 listing** yazıyordu. Bu sayı zamanla
-değişebilir; başvurusu açık fırsat sayısı anlamına gelmez.
+The homepage displayed **7,663 listings** at the time of research. This is a
+changing inventory count, not the number of opportunities accepting applications.
 
-- Kategoriler: scholarships, internships, fellowships, volunteering,
-  training, jobs, competitions, grants; filtrede ayrıca other bulunuyor.
-- Liste tablosu: fırsat başlığı/türü, kaynak kurum ve web sitesi,
-  destination (hedef ülke), deadline. Başlık /opportunity/<id>/ detayına,
-  kaynak kurum /sources/publisher/<source-id>/ sayfasına bağlanıyor.
-- /opportunities/ ve kategori sayfalarında 30 kayıt/sayfa; staj arşivinin
-  HTML gezinmesinde 33 sayfa var. Statik yollar /page/2/ biçiminde;
-  JavaScript arama durumunu URL sorgu parametreleriyle de saklıyor.
-- Filtre adları: q (metin), country (yayıncı ülkesi), destination (hedef),
-  category, source, eligible (başvuran ülkesi). Yayıncı ülkesini kişinin
-  vatandaşlığı veya fırsatın gerçekleştiği ülke sanmamak gerekiyor.
-- Belgelenen ve JavaScript'in çağırdığı sıralama: süresi dolmamış tarihli
-  kayıtlar yakın tarihe göre, tarihi bilinmeyenler, sonra süresi geçmişler;
-  eşit tarihte kayıt kimliği. Filtreler tüm koleksiyona sayfalamadan önce
-  uygulanıyor. Statik sayfalar JS olmadan okunabiliyor; arama ve canlı
-  süre kontrolü JavaScript gerektiriyor.
-- Detaylar: başlık, tür, varsa kısa özet; Destination, Who may apply,
-  Deadline, Published, Last checked, Publisher, kaynak atfı ve dış
-  “Read the original & apply” bağlantısı. Bu bağlantı bazen başka bir
-  derleyiciye gidiyor; mutlaka doğrudan organizatör başvurusu değil.
+- Categories: scholarships, internships, fellowships, volunteering, training,
+  jobs, competitions, and grants. Filters also include other.
+- Table fields: opportunity title/type, source institution and website,
+  destination, and deadline. Titles link to /opportunity/<id>/; institutions
+  link to /sources/publisher/<source-id>/.
+- /opportunities/ and category pages contain 30 records per page. The internship
+  archive exposed 33 pages. Static pagination uses /page/2/; JavaScript also
+  stores search state in URL query parameters.
+- Filters: q (text), country (publisher country), destination, category, source,
+  and eligible (applicant country). Publisher country must not be confused with
+  the applicant's citizenship or the opportunity's destination.
+- Documented ordering: unexpired dated records by nearest deadline, unknown
+  deadlines, then expired records; record ID breaks equal-deadline ties.
+  Filters apply to the full collection before pagination. Static browsing works
+  without JavaScript; search and live expiry checks require JavaScript.
+- Detail fields: title, type, optional short summary, Destination, Who may apply,
+  Deadline, Published, Last checked, Publisher, attribution, and an external
+  "Read the original & apply" link. This link sometimes leads to another
+  aggregator rather than directly to the organizer's application.
 
-İncelenen örnekler (hepsi www üzerinde HTTP 200):
+Inspected examples, all HTTP 200 through www:
 
-| Tür | Fırsat / detay yolu | Gözlem |
+| Type | Opportunity / detail link | Observation |
 | --- | --- | --- |
-| Burs | [DAAD EPOS 2027](https://www.youthopps.org/opportunity/youth-opportunities-59140/) | Özet uygun ülkeleri metinle veriyor; yapılandırılmış uygunluk ve destination eksik; youthop.com'a yönlendiriyor |
-| Burs | [Fulbright – Indiana University](https://www.youthopps.org/opportunity/0e4a05e909f2d1e9c849375e/) | İkinci burs detay örneği; özgün dilde başlık |
-| Fellowship | [UMAPS 2027–2028](https://www.youthopps.org/opportunity/youth-opportunities-59479/) | Ülke ve aday gösterilme koşulu özette; Who may apply alanı bilinmiyor |
-| Fellowship | [African Climate Collaborative](https://www.youthopps.org/opportunity/youth-opportunities-59546/) | İkinci fellowship detay örneği |
-| Staj | [WBI CIRC SEE](https://www.youthopps.org/opportunity/c4ecbf2fc9104fe59f63eb2e/) | Fransa; aylık 1.400 avro ve 500 avroya kadar seyahat desteği özette; son tarih 2026-11-13; öğrenci koşulu özette |
-| Staj | [Remote journalist/content creator](https://www.youthopps.org/opportunity/youth-for-europe-97980/) | Ücretsiz/uzaktan bilgisi başlıkta; destination ve uygunluk bilinmiyor; son tarih 2026-12-02 |
+| Scholarship | [DAAD EPOS 2027](https://www.youthopps.org/opportunity/youth-opportunities-59140/) | Eligible countries appear in the summary; structured eligibility and destination are missing; links to youthop.com |
+| Scholarship | [Fulbright - Indiana University](https://www.youthopps.org/opportunity/0e4a05e909f2d1e9c849375e/) | Second scholarship detail example; title retains its source language |
+| Fellowship | [UMAPS 2027-2028](https://www.youthopps.org/opportunity/youth-opportunities-59479/) | Country and nomination conditions appear in the summary; structured applicant eligibility is unknown |
+| Fellowship | [African Climate Collaborative](https://www.youthopps.org/opportunity/youth-opportunities-59546/) | Second fellowship detail example |
+| Internship | [WBI CIRC SEE](https://www.youthopps.org/opportunity/c4ecbf2fc9104fe59f63eb2e/) | France; summary mentions EUR 1,400/month, up to EUR 500 travel support, student requirements, and deadline 2026-11-13 |
+| Internship | [Remote journalist/content creator](https://www.youthopps.org/opportunity/youth-for-europe-97980/) | Title states unpaid/remote; destination and eligibility unknown; deadline 2026-12-02 |
 
-Önemli ayrıştırma ayrıntısı: ham HTML'de `Expired` etiketi `hidden`
-özniteliğiyle bulunabiliyor. Sadece düz metinde bu kelimeyi bulmak,
-fırsatın süresinin geçtiği anlamına gelmez. Tarih ve görünürlük mantığı
-kullanılmalı. Site belgeleri yalnızca gün içeren tarihler için UTC gün
-sonunu kullanıyor; özgün yayıncının gerçek saat dilimi yine teyit edilmeli.
+Parsing detail: raw HTML can contain an `Expired` label with a `hidden`
+attribute. Finding that word in plain extracted text does not establish expiry.
+Use the deadline and visibility logic. Site documentation uses the end of the
+UTC day for date-only deadlines; the original publisher's actual time zone still
+needs verification.
 
-## 3. API, RSS, JSON ve izinler
+## 3. API, RSS, JSON, and permissions
 
-### Doğrulanan teknik erişim yolları
+### Verified technical access paths
 
-| Yol | Sonuç | Değerlendirme |
+| Path | Result | Interpretation |
 | --- | --- | --- |
-| [robots.txt](https://www.youthopps.org/robots.txt) | 200; User-agent: *, Allow: /; sitemap bağlantısı | Genel tarama engeli yok; yeniden kullanım lisansı değil |
-| [sitemap.xml](https://www.youthopps.org/sitemap.xml) | 200; sayfa ve kaynak bazlı alt sitemap'ler | URL keşfi için kullanılabilir |
-| https://www.youthopps.org/feed/ | 404 | Bu aday RSS adresi yok; tüm olası RSS adreslerinin yokluğunu kanıtlamaz |
-| https://www.youthopps.org/wp-json/ | 404 | Bu WordPress API adayı yok; başka API yok demek değildir |
-| /assets/collection.966583482b8b7416.json | 200; 966 staj kaydı | Kategori HTML'inin data-index özniteliğinden keşfedilen gerçek arama indeksi |
-| GitHub data-source JSON | 200; örnek kaynakta 417 kayıt | Site mimari belgesinin doğrudan bağlantı verdiği yapılandırılmış anlık görüntü |
+| [robots.txt](https://www.youthopps.org/robots.txt) | 200; User-agent: *, Allow: /; sitemap link | No general crawling prohibition; not a reuse license |
+| [sitemap.xml](https://www.youthopps.org/sitemap.xml) | 200; page and source-specific sub-sitemaps | Useful for discovering URLs |
+| https://www.youthopps.org/feed/ | 404 | This candidate RSS address is absent; other feed paths were not ruled out |
+| https://www.youthopps.org/wp-json/ | 404 | This WordPress API candidate is absent; other APIs were not ruled out |
+| /assets/collection.966583482b8b7416.json | 200; 966 internship records | Actual search index discovered from the category HTML data-index attribute |
+| GitHub data-source JSON | 200; 417 records in the sampled source | Structured snapshot linked by the site's architecture documentation |
 
-İncelenen ana sayfa, docs, mimari, kaynak politikası ve kategori sayfalarında
-belgelenmiş bir genel sorgu API'si veya RSS/Atom keşif bağlantısı bulunmadı.
-“Resmî API kesinlikle yok” sonucu çıkarılmıyor. Bu mimari statik web
-sayfaları ve koleksiyon indeksleri kullanıyor; canlı uygulama sunucusu
-veya belgelenmiş API sözleşmesi sunulduğuna dair kanıt bulunmadı.
+No documented general query API or RSS/Atom discovery link was found in the
+inspected homepage, documentation, architecture, source policy, or category pages.
+This does not prove that no official API exists. The observed architecture uses
+static pages and collection indexes; a live application API contract was not found.
 
-Statik staj indeksi alanları: id, deadline (sayısal zaman), html, search,
-category, source, country, destination, eligible. Filtrelenmiş sonuçlar
-istemcide hesaplanıyor; URL'deki q parametresini sunucu API'si sanmamalı.
-İndeks adresi içerik hash'i taşıyor; sabit kodlanmamalı, ilgili HTML'den
-keşfedilmeli. html parçası uygulamada güvenilir komut veya doğrudan
-render edilebilir içerik kabul edilmemeli.
+Static internship index fields: id, deadline (numeric timestamp), html, search,
+category, source, country, destination, eligible. Filtering occurs client-side;
+the q URL parameter should not be mistaken for a server API. Index filenames
+contain a content hash and should be discovered from HTML rather than hardcoded.
+Treat HTML fragments as untrusted content, never as instructions or automatically
+safe markup for rendering.
 
-### Tercih edilen veri adayı: data-source
+### Preferred candidate: data-source snapshots
 
-[Mimari belgesi](https://www.youthopps.org/docs/architecture/) şu akışı
-anlatıyor: yayıncı → data-pipeline → data-source → statik site.
-[Veri deposu](https://github.com/YouthOpps/data-source) her kaynak için
-`datas/<source-id>/data.json` ve `metadata.json` yayımlıyor.
+The [architecture guide](https://www.youthopps.org/docs/architecture/) describes:
+publisher -> data-pipeline -> data-source -> static website.
+The [data repository](https://github.com/YouthOpps/data-source) publishes
+`datas/<source-id>/data.json` and `metadata.json` for each source.
 
-Doğrudan okunan örnekler:
+Directly inspected examples:
+
 - https://raw.githubusercontent.com/YouthOpps/data-source/main/README.md
 - https://raw.githubusercontent.com/YouthOpps/data-source/main/datas/youth-opportunities/data.json
 - https://raw.githubusercontent.com/YouthOpps/data-source/main/datas/youth-opportunities/metadata.json
 
-Örnek metadata: status=success, record_count=417,
-last_success_at=2026-10-14T22:15:44.203Z; publisher_country=BD ve
-publisher_type=aggregator. Başarı, uygulamaların hâlâ açık olduğunu
-kanıtlamıyor. Hatalı sonraki toplamada son başarılı kayıtlar korunuyor.
+Example metadata: status=success, record_count=417,
+last_success_at=2026-10-14T22:15:44.203Z, publisher_country=BD,
+publisher_type=aggregator. Collection success does not prove applications remain
+open. A later failed collection preserves the last successful records.
 
-Örnek kayıt alanları: id, title, url, source, source_url, published_at,
+Observed record fields: id, title, url, source, source_url, published_at,
 summary, tags, location, deadline, language, category/categories, kind,
-host_countries, eligible_countries, publisher_country, created_at,
-updated_at, first_seen_at, last_seen_at, last_checked_at, status,
-classification. Boş eligible_countries, “tüm ülkeler başvurabilir” demek
-değil: örneklerde ülke şartları yalnızca summary içinde kalabiliyor.
+host_countries, eligible_countries, publisher_country, created_at, updated_at,
+first_seen_at, last_seen_at, last_checked_at, status, classification.
+An empty eligible_countries array in this upstream source does not establish
+worldwide eligibility: some sampled country requirements exist only in summary
+text. A future adapter must preserve this distinction from the explicit
+unrestricted-country convention used in our fictional fixtures.
 
-README kökte catalog.json/aggregate manifest olmadığını belirtiyor.
-Kaynak keşfi için desteklenen yöntem netleştirilmeli; MVP'de açıkça seçilmiş
-kaynak kimlikleri kullanılabilir. Site belgesi yeni yerleşimi anlatırken
-README tüketicinin eski katalogdan taşınması gerektiğine dair bir not da
-barındırıyor. Bu doküman farkı nedeniyle tüketim sürümü commit SHA ile
-sabitleyip gerçek dosya şemasıyla test edilmeli. Site ile main dalındaki
-verinin aynı anlık görüntü olduğu varsayılmamalı.
+The README states that no root catalog.json or aggregate manifest is published.
+Supported source discovery needs clarification; explicitly selected source IDs
+could serve an MVP. The site guide describes the new layout while the repository
+README also contains an old-catalog migration note. Because of this documentation
+difference, pin the consumed commit SHA and test against the actual schema. Do
+not assume the deployed website and the data repository's main branch use the
+same snapshot.
 
-### Yeniden kullanım sınırları
+### Reuse limitations
 
-[Trust policy](https://www.youthopps.org/docs/trust/) kamuya açık GitHub
-erişiminin yeniden kullanım lisansı olmadığını ve bu rehberin lisans
-vermediğini açıkça söylüyor. data-source/main/LICENSE denemesi 404 verdi;
-bu, başka isimde lisans bulunmadığının kapsamlı kanıtı değil. Veri için
-geçerli açık lisans veya üçüncü taraf tüketim koşulları henüz doğrulanmadı.
-Bu nedenle JSON'a teknik erişim doğrulandı, yeniden dağıtım izni doğrulanmadı.
-Tam yazıların, marka ve görsellerin kopyalanması önerilmiyor.
+The [trust policy](https://www.youthopps.org/docs/trust/) explicitly states that
+public GitHub access is not a reuse license and that the guide grants no license.
+The attempted data-source/main/LICENSE path returned 404; this is not exhaustive
+proof that no differently named license exists. Applicable data licensing or
+third-party consumption terms remain unverified. Technical JSON access was
+confirmed, but redistribution permission was not. Copying full articles,
+branding, or images is not recommended.
 
-[Bot belgesi](https://www.youthopps.org/bot/) kendi toplayıcıları için
-robots/koşul incelemesi, en az 6 saniye aralık, kayan bir dakikada en çok
-10 istek başlangıcı, Retry-After'a uyma ve erişim reddinde durma politikası
-anlatıyor. Bu belge üçüncü taraflar için otomatik lisans veya API kullanım
-sözleşmesi değil. Bizim olası HTML adaptörümüz için de en az bu muhafazakâr
-sınırlar ve varsa daha sıkı kaynak koşulları öneriliyor. Araştırma sınırlı
-okuma istekleriyle yapıldı; toplu tarama ve koruma aşma yapılmadı.
+The [bot guide](https://www.youthopps.org/bot/) describes its own collectors'
+policy: review robots/terms, space requests at least six seconds apart, start at
+most ten requests in any rolling minute, honor Retry-After, and stop on access
+refusal. This is not an automatic third-party license or API agreement. At least
+these conservative limits, and any stricter source terms, are proposed for a
+possible HTML adapter. Research used limited read requests; no bulk crawl or
+access-control bypass was performed.
 
-**Karar:** Öncelikle veri anlık görüntülerinin üçüncü taraf kullanım/lisans
-şartlarını site sahibinin belgelerinden veya açıklamasından netleştir.
-İzin uygunsa kaynak bazlı JSON tüket; bu, binlerce detay sayfasını taramayı
-gereksiz kılar. JSON kullanımı uygun değilse izinli statik indeks/HTML
-seçeneklerini değerlendir. RSS/WordPress üzerine uygulama kurma.
-Bu araştırmada site işletmecisine mesaj gönderilmedi.
+**Decision:** Clarify snapshot reuse/licensing through the owner's documentation
+or explanation first. If permitted, consume source-specific JSON rather than
+crawling thousands of detail pages. Otherwise evaluate permitted static-index or
+HTML access. Do not base implementation on unverified RSS or WordPress endpoints.
+No message was sent to the site operator during this research.
 
-## 4. Önerilen Python mimarisi
+## 4. Proposed Python architecture
 
-Başlangıç için mikroservisler yerine tek Python projesi önerilir:
+The original production-oriented proposal is one Python project:
 
-İzin koşulları netleştirilmiş JSON anlık görüntü adaptörü → normalizasyon/doğrulama → SQLite → eşleştirme servisi
-→ FastAPI → ChatGPT GPT Actions veya başka bir istemci.
+Permitted JSON snapshot adapter -> normalization/validation -> SQLite -> matching
+service -> FastAPI -> GPT Actions or another client.
 
-- **Araçlar:** desteklenen Python 3.12+, sanal ortam, kilitli bağımlılıklar;
-  FastAPI, Pydantic, SQLAlchemy ve Alembic. Veri erişimine göre httpx,
-  JSON tüketimi önceliklidir; feedparser yalnızca RSS doğrulanırsa eklenir.
-  HTML ayrıştırıcı yalnızca gerekirse seçilir. Sürümler uygulama aşamasında
-  doğrulanıp sabitlenir; bu aşamada kurulum/dependency dosyası oluşturulmaz.
-- **Toplama:** izinli kaynağa özel adaptör; kaynak kimliği, cursor/sayfa,
-  son başarılı senkronizasyon ve hata kaydı. Komut satırı işiyle başlar;
-  gerekirse zamanlanmış görev eklenir. Ağır kuyruk altyapısı gerekmiyor.
-- **Saklama:** MVP için SQLite ve migration; çok kullanıcılı dağıtım veya
-  eşzamanlı yazma gereksiniminde PostgreSQL. Kaynak kimliği ya da normalize
-  edilmiş kaynak URL'si üzerinde benzersizlik; tekrar çalıştırma idempotent.
-- **Servis:** arama, detay ve profil üzerinden öneri. Veri toplama işi
-  kullanıcı sorgusu sırasında tüm siteyi yeniden taramaz.
-- **Gözlenebilirlik:** son güncelleme, kayıt sayıları, toplama hataları,
-  kaynak durumu ve gecikme; loglarda anahtar veya kişisel profil bulunmaz.
+The implemented mock prototype uses Python 3.11+, FastAPI, and Pydantic, with
+local JSON instead of SQLite. Persistence is unnecessary for its current scope.
+SQLAlchemy/Alembic and a database remain future options, not installed features.
 
-### Fırsat modeli
+- **Tools:** a virtual environment and pinned dependencies. Prefer JSON access;
+  add feedparser only if an RSS source is verified, and an HTML parser only if
+  necessary. Check supported tool versions before implementation changes.
+- **Collection:** a permitted-source adapter with source ID, cursor/page state,
+  last successful synchronization, and error reporting. Begin with a command-line
+  task and add scheduling if needed; a distributed queue is unnecessary initially.
+- **Storage:** SQLite and migrations if persistence becomes necessary;
+  PostgreSQL if deployment needs concurrent writers. Enforce source ID or
+  normalized source URL uniqueness and idempotent refreshes.
+- **Service:** search, details, and profile recommendations. A user search must
+  not trigger a fresh crawl of the whole source site.
+- **Observability:** last update, record counts, collection failures, source
+  status, and latency. Do not log credentials or personal profiles.
 
-id, source, source_id, source_url, publisher_record_url, application_url, title, organization,
-publisher_country, publisher_type, host_countries, source_revision,
-opportunity_type, summary, subjects, location, remote, funding,
+### Proposed opportunity model for real data
+
+id, source, source_id, source_url, publisher_record_url, application_url,
+title, organization, publisher_country, publisher_type, host_countries,
+source_revision, opportunity_type, summary, subjects, location, remote, funding,
 eligible_countries, residency_rules, education_levels, age_min/age_max,
 language_requirements, deadline_at, deadline_precision, deadline_timezone,
 rolling_deadline, published_at, fetched_at, last_verified_at, status.
 
-Kaynak `url` alanı başlangıçta publisher_record_url olarak eşlenir;
-başvuru bağlantısı olduğu teyit edilmeden application_url sayılmaz.
-Kaynak metadata durumu ve son başarılı toplama zamanı ayrıca saklanır.
-Eksik değerler null/bilinmiyor olarak tutulur. Ülke ve alanlar normalize
-edilir; metindeki kanıt ve kaynak bağlantısı alanlarla ilişkilendirilir.
-Tarih saat dilimi belli değilse yapay bir saat dilimi atanmaz. Süresi
-geçen fırsatlar varsayılan önerilerden çıkarılır; tarihi bilinmeyenler
-ayrı işaretlenir. Kaybolan kayıt hemen silinmez; durum değişimi izlenir.
+Initially map upstream `url` to publisher_record_url. Do not call it an
+application_url until its role is confirmed. Store metadata status and last
+successful collection separately. Missing values remain null/unknown. Normalize
+countries and fields while retaining textual evidence and provenance. Do not
+invent a time zone for ambiguous deadlines. Exclude expired opportunities from
+default recommendations, mark unknown dates, and track disappeared records
+rather than immediately deleting them.
 
-### Kullanıcı profili ve eşleştirme
+### Profile and matching
 
-Asgari profil: eğitim seviyesi, alan/ilgi, vatandaşlık ve gerekiyorsa
-ikamet, tercih edilen ülkeler, fırsat türleri, finansman/uzaktan katılım
-tercihi. Yaş yalnızca uygunluk için gerektiğinde istenir; doğum tarihi,
-pasaport veya CV ilk sürüm için gerekli değildir. MVP'de profil istek
-boyunca kullanılır, varsayılan olarak kalıcı saklanmaz.
+The planned profile includes education, field/interests, citizenship and separate
+residence where needed, preferred destinations/types, and optional funding or
+remote preferences. Request age where needed for eligibility; passport, full
+birth date, and CV are unnecessary for the first version. Profiles are used
+within a request without default persistence.
 
-Önce açık uygunsuzluklar elenir: süre dolması veya kesin vatandaşlık,
-yaş, eğitim kuralı ihlali. Eksik kural/profil alanı uygunsuzluk ya da
-kesin uygunluk sayılmaz; sonuç “uygunluğu kontrol edilmeli” olarak döner.
-Ardından ilgi, fırsat türü, konum ve finansman tercihleriyle açıklanabilir
-puanlama yapılır. Her sonuç eşleşme nedenleri, kontrol edilmesi gereken
-şartlar, güncellik ve kaynak bağlantısını taşır. Puan olasılık değildir.
+First exclude explicit deadline, citizenship, age, and education violations.
+Missing rules or profile fields establish neither eligibility nor ineligibility;
+return a review warning. Then score preferences with understandable reasons.
+Results should carry matching reasons, unverified conditions, freshness, and
+source links. A score is not an acceptance probability. The prototype's exact
+implemented filters and weights are documented in README.md.
 
-İlk sürüm için LLM zorunlu değil. Daha sonra Türkçe özet ve doğal dil
-sorgusu eklenebilir; model doğrulanmamış şart/tarih üretemez. Sayfa içeriği
-ve haricî metinler talimat kabul edilmez; prompt injection'a karşı güven
-sınırı korunur. Vektör veritabanı ve embedding ilk aşamada gereksiz.
+An LLM is optional. Future English summaries and natural-language search must
+not invent requirements or deadlines. External page text is data, not an
+instruction source; maintain the trust boundary against prompt injection.
+Embeddings and a vector database are unnecessary for the initial scope.
 
-## 5. ChatGPT entegrasyonu
+## 5. ChatGPT integration
 
-Eski ChatGPT Plugins beta yaklaşımı kullanımdan kaldırılmıştır; yeni bir
-proje için eski plugin manifestini temel almak önerilmez. Bu bilgi canlı
-belgelerle bu oturumda doğrulanamadı. Güncel hesap/plan desteği, yayınlama
-koşulları ve tercih edilen entegrasyon uygulama öncesinde resmî belgelerden
-teyit edilecek. Önerilen başlangıç: özel GPT içinden **GPT Actions** ile
-FastAPI'ye erişim. ChatGPT Apps SDK/MCP ayrı bir entegrasyon seçeneğidir;
-Actions ile aynı protokol değildir ve ilk sürüme zorunlu eklenmez.
+The legacy ChatGPT Plugins beta was retired; a new project should not depend on
+its plugin manifest. That platform information was not verified against live
+OpenAI documentation during this research. Confirm current account support,
+publication requirements, and integration options before implementation.
+The proposed starting point is **GPT Actions** calling FastAPI from a custom GPT.
+ChatGPT Apps SDK/MCP is a separate integration option, not the Actions protocol,
+and is not required for the first version.
 
-GPT Actions için planlanan bileşenler:
+Planned Actions components:
 
-- İnternetten ulaşılabilir HTTPS API ve geçerli TLS sertifikası.
-- FastAPI'den türetilecek, Actions'ın desteklediği OpenAPI özellikleriyle
-  doğrulanmış şema; kararlı operationId, açıklamalar ve örnekler.
-- GET /opportunities: tür, ülke, alan, tarih ve sayfalama filtreleri.
-- GET /opportunities/{id}: kaynaklı fırsat detayı.
-- POST /recommendations: asgari profil ve tercihleri alıp açıklamalı
-  sonuç döndürür; ilk sürümde veri değiştiren işlem içermez.
-- GET /health: süreç sağlığı; veri güncelliği ayrıca raporlanır.
-- Her sonuçta kaynak URL'si, başvuru URL'si, güncelleme zamanı ve
-  uygunluk belirsizlikleri; sınırlı yanıt boyutu ve anlaşılır hata modeli.
-- Kişisel olmayan pilot için kota korumalı API anahtarı; kalıcı kullanıcı
-  hesapları gerekirse kullanıcı bazlı OAuth. Anahtarları şemaya veya
-  depoya koyma; sunucu sır yöneticisi ve Actions ayarlarında yönet.
-- GPT talimatları: profil için yalnızca eksik gerekli alanı sor, API'den
-  gelen kaynağı göster, uygunluk/başarı garantisi verme, otomatik başvurma.
-- Kamuya açılış gerekiyorsa gizlilik politikası, destek iletişimi ve
-  platformun o tarihte istediği alan adı/yayınlama doğrulamaları.
+- A publicly reachable HTTPS API with a valid TLS certificate.
+- A FastAPI-generated schema checked against the platform's supported OpenAPI
+  features, with stable operation IDs, descriptions, and examples.
+- Originally proposed future routes: GET /opportunities for filtered discovery,
+  GET /opportunities/{id} for details, and POST /recommendations for explained
+  profile matches. These are not implemented routes in the prototype.
+- Implemented prototype routes: POST /opportunities/search and GET /health.
+  See README.md and openapi.json for the actual current contract.
+- Source/application URLs, update times, and eligibility uncertainty in results;
+  bounded response sizes and understandable errors.
+- A quota-protected API key for a non-personal pilot, or user OAuth for persistent
+  accounts. Manage credentials in server secret storage and Actions settings,
+  never in the schema or repository.
+- GPT instructions: ask only for missing necessary profile fields, cite API
+  sources, avoid eligibility/success guarantees, and do not submit applications.
+- A privacy policy, support contact, and any current domain/publication checks
+  required for public distribution.
 
-Tarihsel Plugins uyumluluğu ayrıca istenirse /.well-known/ai-plugin.json,
-OpenAPI belgesi, kimlik doğrulama, logo ve hukukî iletişim alanları
-incelenebilir. Bunlar eski yaklaşımın bileşenleridir; bugün ChatGPT'ye
-kurulabilir bir plugin sağlayacağı taahhüt edilmez.
+Historical Plugins compatibility, if separately requested, could involve
+/.well-known/ai-plugin.json, OpenAPI, authentication, a logo, and legal contact
+fields. These are legacy components, not a promise of present-day installability.
 
-Resmî doğrulama adresleri (bu oturumda içerikleri okunamadı):
+Official verification targets, whose content was not read during research:
+
 - https://help.openai.com/en/articles/8988022-winding-down-the-chatgpt-plugins-beta
 - https://platform.openai.com/docs/actions
 
-## 6. Uygulama aşamaları ve kabul ölçütleri
+## 6. Implementation phases and acceptance criteria
 
-1. **Kaynağı doğrula:** ağ erişimi, hedef site kimliği, kategori örnekleri,
-   erişim belgeleri ve kullanım izni. Sonuçları bu plana kaynaklarıyla ekle.
-   Bu adım tamamlanmadan canlı veri toplayıcıyı uygulama.
-2. **Veri katmanı:** doğrulanmış şema ve izinli adaptör. Tür, eksik tarih,
-   saat dilimi, tekrarlı kayıt ve değişen sayfa için anlamlı testler.
-3. **Eşleştirme:** sentetik profillerle açık uygunsuzluğun elenmesi, belirsiz
-   uygunluğun işaretlenmesi ve puan açıklamalarının tutarlılığı.
-4. **API:** arama, detay, öneri, doğrulama hataları, sayfalama, kota ve
-   kimlik doğrulama testleri. Son kullanıcının gördüğü kaynakları doğrula.
-5. **Actions pilotu:** gerçek HTTPS uçta uçtan uca profil → öneri → detay
-   akışı. Şema uyumluluğunu ve hata/timeout davranışını ChatGPT'de dene.
+1. **Verify the source:** network access, site identity, category examples,
+   access documentation, and reuse permission. Record evidence before building
+   a live-data collector.
+2. **Data layer:** validate the schema and permitted adapter. Test categories,
+   missing dates, time zones, duplicate records, and page/schema changes.
+3. **Matching:** synthetic profiles must demonstrate explicit exclusions,
+   uncertainty warnings, and consistent score explanations.
+4. **API:** test search/details/recommendations as implemented, validation,
+   pagination, quotas, and authentication when added. Check displayed sources.
+5. **Actions pilot:** verify an actual HTTPS profile -> recommendation -> detail
+   flow in ChatGPT, including schema support, errors, and timeouts.
 
-Ayrıca: toplama tekrarında duplikasyon oluşmamalı; süresi geçen fırsat
-aktif öneriye girmemeli; kaynak erişilemezse önbellek yaşı görünmeli;
-403/429 davranışı test edilmeli; loglarda profil/sır bulunmamalı.
-MVP için dağıtık sistem, ödeme, CV yükleme, otomatik başvuru ve bildirim
-altyapısı kapsam dışıdır.
+Further checks: repeated collection must not duplicate records; expired records
+must not appear as active recommendations; stale cache age must be visible;
+403/429 handling must be tested; logs must exclude profiles and secrets.
+Distributed services, payments, CV uploads, automatic applications, and
+notification infrastructure are outside the initial scope.
 
-## 7. Güncellenen kararlar ve sonraki adım
+## 7. Decisions and next steps
 
-- Ağ erişimi www üzerinden doğrulandı; önceki genel erişim engeli giderildi.
-- Teknik tercih: kullanım şartları netleşirse kaynak bazlı JSON anlık
-  görüntüleri + SQLite + kural tabanlı eşleştirme + FastAPI + GPT Actions.
-  HTML scraping veya RSS ilk tercih değil.
-- Kaynak ülkesi, hedef ülke ve uygun vatandaşlık/ikamet ayrı tutulacak.
-  Metindeki koşullar ile boş yapılandırılmış alanlar çelişirse kesin
-  uygunluk iddia edilmeyecek; kanıt ve kontrol gereksinimi gösterilecek.
-- JSON senkronizasyonu tek bir commit/revizyondan yapılacak; data ile
-  metadata tutarlı okunacak. Şema hatasında son başarılı yerel kopya
-  korunacak ve eski veri olduğu kullanıcıya bildirilecek.
-- Açık kalanlar: veri yeniden kullanım lisansı/koşulları, desteklenen
-  kaynak keşfi ve güncelleme sözleşmesi, asıl yayıncıdan örnek uygunluk/
-  tarih doğrulaması. Yayıncı siteleri bu araştırmada ayrıca taranmadı.
-- ChatGPT platform belgeleri bu takip çalışmasının kapsamı içinde yeniden
-  doğrulanmadı; önceki entegrasyon önerisi koşullu kalıyor.
+- Access through www was confirmed; the earlier general proxy restriction was
+  resolved for the research requests.
+- If reuse terms permit: prefer source-specific JSON snapshots, optional SQLite,
+  rule-based matching, FastAPI, and GPT Actions. HTML scraping/RSS is not the
+  first choice.
+- Keep publisher country, destination, and applicant citizenship/residence
+  separate. Do not assert eligibility when structured fields are missing or
+  disagree with textual conditions; retain evidence and review warnings.
+- Read data and metadata from a consistent commit/revision. On schema failure,
+  preserve the last valid local snapshot and disclose its age.
+- Open questions: licensing/reuse terms, supported source discovery, refresh
+  contract, and sample deadline/eligibility verification with original publishers.
+  Publisher sites were not independently crawled during this research.
+- OpenAI platform documentation was not reverified during the follow-up site
+  research; the integration proposal remains conditional.
 
-Bu planın ardından kullanıcı ilk çalışan prototipi onayladı. Prototip
-yalnızca kurgusal yerel JSON kullanır; canlı kaynak entegrasyonu yapılmadı.
-Uygulama ve doğrulama komutları README.md içinde belgelenmiştir.
+The user approved a working prototype after this research. It uses fictional
+local JSON only; no live data source was integrated. README.md documents the
+implemented behavior, installation, startup, and validation commands.

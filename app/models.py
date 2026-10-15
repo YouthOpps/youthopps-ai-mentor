@@ -23,12 +23,12 @@ class Education(str, Enum):
 class Profile(BaseModel):
     model_config = ConfigDict(extra='forbid')
     age: int = Field(ge=1, le=120)
-    country: str | None = Field(default=None, pattern=r'^[A-Za-z]{2}$', description='Vatandaşlık ülkesi; bilinmiyorsa boş bırakılır. İkametten çıkarılmaz.')
-    residence_country: str | None = Field(default=None, pattern=r'^[A-Za-z]{2}$', description='İkamet ülkesi; vatandaşlık şartını karşılamak için kullanılmaz.')
-    preferred_region: Literal['europe'] | None = Field(default=None, description='europe: uygulamanın belgelenmiş Avrupa hedef ülke listesi; AB ile aynı değildir. Uzaktan/belirsiz konumlar dahil edilmez.')
+    country: str | None = Field(default=None, pattern=r'^[A-Za-z]{2}$', description='Citizenship country; omit when unknown. Never inferred from residence.')
+    residence_country: str | None = Field(default=None, pattern=r'^[A-Za-z]{2}$', description='Country of residence; not used to satisfy citizenship requirements.')
+    preferred_region: Literal['europe'] | None = Field(default=None, description='europe: the documented European destination list, not EU membership. Remote and unknown locations are excluded.')
     education: Education
     interests: list[str] = Field(min_length=1, max_length=20)
-    opportunity_type: Category | None = Field(default=None, description='Boş bırakılırsa tüm türler aranır.')
+    opportunity_type: Category | None = Field(default=None, description='Search all types when omitted.')
 
     @field_validator('country', 'residence_country')
     @classmethod
@@ -40,14 +40,14 @@ class Profile(BaseModel):
     def clean_interests(cls, values: list[str]) -> list[str]:
         cleaned = list(dict.fromkeys(value.strip().casefold() for value in values))
         if any(not value or len(value) > 80 for value in cleaned):
-            raise ValueError('İlgi alanları boş olamaz ve en fazla 80 karakter olmalıdır.')
+            raise ValueError('Each interest must be nonblank and at most 80 characters long.')
         return cleaned
 
 
 class SearchRequest(BaseModel):
     model_config = ConfigDict(extra='forbid', json_schema_extra={
         'examples': [{'profile': {'age': 22, 'country': 'TR',
-                     'education': 'undergraduate', 'interests': ['yapay zeka'],
+                     'education': 'undergraduate', 'interests': ['artificial intelligence'],
                      'opportunity_type': 'scholarship'}, 'limit': 5}]
     })
     profile: Profile
@@ -59,7 +59,7 @@ class Eligibility(BaseModel):
     description: str
     min_age: int | None = Field(default=None, ge=1)
     max_age: int | None = Field(default=None, le=120)
-    countries: list[str] | None = Field(default=None, description='null: bilinmiyor; []: tüm ülkeler.')
+    countries: list[str] | None = Field(default=None, description='null: unknown; []: all countries.')
     education_levels: list[Education] | None = None
 
 
@@ -67,7 +67,7 @@ class Opportunity(BaseModel):
     id: str
     title: str
     description: str
-    country: str = Field(description='Fırsatın hedef ülkesi; vatandaşlık şartı değildir.')
+    country: str = Field(description='Opportunity destination; not a citizenship requirement.')
     category: Category
     deadline: date | None
     interests: list[str]

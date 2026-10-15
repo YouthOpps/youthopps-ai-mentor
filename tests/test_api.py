@@ -20,19 +20,19 @@ def client():
 @pytest.fixture
 def payload():
     return {'profile': {'age': 22, 'country': 'tr', 'education': 'undergraduate',
-                        'interests': ['yapay zeka'], 'opportunity_type': 'scholarship'}}
+                        'interests': ['artificial intelligence'], 'opportunity_type': 'scholarship'}}
 
 
 def test_search_rank_and_mock_disclosure(client, payload):
     response = client.post('/opportunities/search', json=payload)
     assert response.status_code == 200
     data = response.json()
-    assert data['is_mock'] and 'kurgusal' in data['notice']
+    assert data['is_mock'] and 'fictional' in data['notice']
     assert data['evaluated_on'] == '2026-10-15'
     assert data['results'][0]['opportunity']['id'] == 'ai-scholarship'
     assert data['results'][0]['score'] == 100
     assert data['results'][0]['reasons']
-    assert 'örnek fırsat' in data['results'][0]['mentor_message']
+    assert 'mock opportunity' in data['results'][0]['mentor_message']
     assert all(r['opportunity']['is_mock'] for r in data['results'])
     assert all(r['opportunity']['source_url'].startswith('https://example.org/') for r in data['results'])
 
@@ -62,7 +62,7 @@ def test_unknown_eligibility_warns(client, payload):
 
 
 def test_text_filter_and_empty_results(client, payload):
-    payload['query'] = 'Küresel'
+    payload['query'] = 'Global'
     result = client.post('/opportunities/search', json=payload).json()
     assert result['total'] == 1
     assert result['results'][0]['opportunity']['id'] == 'global-scholarship'
@@ -115,7 +115,7 @@ def test_openapi_contract(client):
 def test_europe_internship_scenario(client):
     payload = {'profile': {'age': 22, 'residence_country': 'TR',
                           'education': 'undergraduate',
-                          'interests': ['bilgisayar mühendisliği'],
+                          'interests': ['computer engineering'],
                           'opportunity_type': 'internship',
                           'preferred_region': 'europe'}}
     response = client.post('/opportunities/search', json=payload)
@@ -126,7 +126,7 @@ def test_europe_internship_scenario(client):
         ('software-internship-de', 100), ('software-internship-fr', 100),
         ('climate-internship', 60)]
     assert all(r['opportunity']['country'] != 'Remote' for r in data['results'])
-    assert all(any('Avrupa' in reason for reason in r['reasons']) for r in data['results'])
+    assert all(any('Europe' in reason for reason in r['reasons']) for r in data['results'])
 
 
 def test_europe_excludes_non_european_and_unknown_destinations(payload):
@@ -146,7 +146,7 @@ def test_residence_does_not_prove_citizenship(client, payload):
     item = next(r for r in data['results'] if r['opportunity']['id'] == 'ai-scholarship')
     assert item['score'] == 85
     assert item['eligibility_status'] == 'needs_review'
-    assert any('ikamet yeterli değildir' in warning for warning in item['warnings'])
+    assert any('residence is not sufficient' in warning for warning in item['warnings'])
 
 
 def test_unknown_region_is_rejected(client, payload):

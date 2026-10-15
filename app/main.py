@@ -6,10 +6,10 @@ from .matching import recommend
 from .models import SearchRequest, SearchResponse
 from .repository import MockRepository, OpportunityRepository
 
-NOTICE = 'DEMO: Tüm fırsatlar kurgusal örnek verilerdir; gerçek ilan veya başvuru bağlantısı değildir.'
+NOTICE = 'DEMO: All opportunities are fictional mock records, not real listings or application links.'
 app = FastAPI(
     title='YouthOpp AI Mentor — Mock Prototype', version='0.1.0',
-    description=NOTICE + ' Profil kaydedilmez. Puanlar başarı olasılığı değildir.',
+    description=NOTICE + ' Profiles are not stored. Scores are not acceptance probabilities.',
 )
 
 
@@ -27,7 +27,7 @@ def health() -> dict[str, str]:
 
 
 @app.post('/opportunities/search', response_model=SearchResponse,
-          operation_id='searchOpportunities', summary='Profil için örnek fırsatları sırala',
+          operation_id='searchOpportunities', summary='Rank mock opportunities for a profile',
           description=NOTICE, openapi_extra={'x-openai-isConsequential': False})
 def search_opportunities(
     request: SearchRequest,

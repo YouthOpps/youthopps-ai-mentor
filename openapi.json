@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "YouthOpp AI Mentor — Mock Prototype",
-    "description": "DEMO: Tüm fırsatlar kurgusal örnek verilerdir; gerçek ilan veya başvuru bağlantısı değildir. Profil kaydedilmez. Puanlar başarı olasılığı değildir.",
+    "description": "DEMO: All opportunities are fictional mock records, not real listings or application links. Profiles are not stored. Scores are not acceptance probabilities.",
     "version": "0.1.0"
   },
   "paths": {
@@ -30,8 +30,8 @@
     },
     "/opportunities/search": {
       "post": {
-        "summary": "Profil için örnek fırsatları sırala",
-        "description": "DEMO: Tüm fırsatlar kurgusal örnek verilerdir; gerçek ilan veya başvuru bağlantısı değildir.",
+        "summary": "Rank mock opportunities for a profile",
+        "description": "DEMO: All opportunities are fictional mock records, not real listings or application links.",
         "operationId": "searchOpportunities",
         "requestBody": {
           "content": {
@@ -135,7 +135,7 @@
               }
             ],
             "title": "Countries",
-            "description": "null: bilinmiyor; []: tüm ülkeler."
+            "description": "null: unknown; []: all countries."
           },
           "education_levels": {
             "anyOf": [
@@ -188,7 +188,7 @@
           "country": {
             "type": "string",
             "title": "Country",
-            "description": "Fırsatın hedef ülkesi; vatandaşlık şartı değildir."
+            "description": "Opportunity destination; not a citizenship requirement."
           },
           "category": {
             "$ref": "#/components/schemas/Category"
@@ -261,7 +261,7 @@
               }
             ],
             "title": "Country",
-            "description": "Vatandaşlık ülkesi; bilinmiyorsa boş bırakılır. İkametten çıkarılmaz."
+            "description": "Citizenship country; omit when unknown. Never inferred from residence."
           },
           "residence_country": {
             "anyOf": [
@@ -274,7 +274,7 @@
               }
             ],
             "title": "Residence Country",
-            "description": "İkamet ülkesi; vatandaşlık şartını karşılamak için kullanılmaz."
+            "description": "Country of residence; not used to satisfy citizenship requirements."
           },
           "preferred_region": {
             "anyOf": [
@@ -287,7 +287,7 @@
               }
             ],
             "title": "Preferred Region",
-            "description": "europe: uygulamanın belgelenmiş Avrupa hedef ülke listesi; AB ile aynı değildir. Uzaktan/belirsiz konumlar dahil edilmez."
+            "description": "europe: the documented European destination list, not EU membership. Remote and unknown locations are excluded."
           },
           "education": {
             "$ref": "#/components/schemas/Education"
@@ -310,7 +310,7 @@
                 "type": "null"
               }
             ],
-            "description": "Boş bırakılırsa tüm türler aranır."
+            "description": "Search all types when omitted."
           }
         },
         "additionalProperties": false,
@@ -406,7 +406,7 @@
               "country": "TR",
               "education": "undergraduate",
               "interests": [
-                "yapay zeka"
+                "artificial intelligence"
               ],
               "opportunity_type": "scholarship"
             }
