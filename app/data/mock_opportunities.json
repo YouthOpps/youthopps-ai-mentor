@@ -1,0 +1,190 @@
+[
+  {
+    "id": "ai-scholarship",
+    "title": "MOCK: AI Student Scholarship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: ai, technology.",
+    "country": "DE",
+    "category": "scholarship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "ai",
+      "technology"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
+      "min_age": 18,
+      "max_age": 30,
+      "countries": [
+        "TR"
+      ],
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/ai-scholarship",
+    "is_mock": true
+  },
+  {
+    "id": "climate-internship",
+    "title": "MOCK: Climate Research Internship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: climate, research.",
+    "country": "NL",
+    "category": "internship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "climate",
+      "research"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
+      "min_age": 18,
+      "max_age": 35,
+      "countries": [],
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/climate-internship",
+    "is_mock": true
+  },
+  {
+    "id": "research-fellowship",
+    "title": "MOCK: Research Fellowship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: ai, research.",
+    "country": "GB",
+    "category": "fellowship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "ai",
+      "research"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
+      "min_age": 21,
+      "max_age": 50,
+      "countries": [],
+      "education_levels": [
+        "graduate",
+        "doctoral"
+      ]
+    },
+    "source_url": "https://example.org/mock/research-fellowship",
+    "is_mock": true
+  },
+  {
+    "id": "community-program",
+    "title": "MOCK: Community Education Program",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: education, technology.",
+    "country": "TR",
+    "category": "other",
+    "deadline": "2099-12-31",
+    "interests": [
+      "education",
+      "technology"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
+      "min_age": 16,
+      "max_age": 40,
+      "countries": [],
+      "education_levels": [
+        "high_school",
+        "undergraduate",
+        "other"
+      ]
+    },
+    "source_url": "https://example.org/mock/community-program",
+    "is_mock": true
+  },
+  {
+    "id": "unknown-internship",
+    "title": "MOCK: Technology Discovery Internship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: technology, ai.",
+    "country": "Remote",
+    "category": "internship",
+    "deadline": null,
+    "interests": [
+      "technology",
+      "ai"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
+      "min_age": null,
+      "max_age": null,
+      "countries": null,
+      "education_levels": null
+    },
+    "source_url": "https://example.org/mock/unknown-internship",
+    "is_mock": true
+  },
+  {
+    "id": "global-scholarship",
+    "title": "MOCK: Global Education Scholarship",
+    "description": "A completely fictional demo opportunity with no real organization or application. Topics: education, ai.",
+    "country": "FR",
+    "category": "scholarship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "education",
+      "ai"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements created only to demonstrate prototype matching.",
+      "min_age": 18,
+      "max_age": 35,
+      "countries": [],
+      "education_levels": [
+        "undergraduate",
+        "graduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/global-scholarship",
+    "is_mock": true
+  },
+  {
+    "id": "software-internship-de",
+    "title": "MOCK: Software Development Internship in Germany",
+    "description": "A fictional technology internship created to test the student scenario. This is not a real listing or application.",
+    "country": "DE",
+    "category": "internship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "technology",
+      "ai"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements: ages 18-30, undergraduate student, no citizenship country restriction. No claim is made about visas or work authorization.",
+      "min_age": 18,
+      "max_age": 30,
+      "countries": [],
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/software-internship-de",
+    "is_mock": true
+  },
+  {
+    "id": "software-internship-fr",
+    "title": "MOCK: Web Development Internship in France",
+    "description": "A fictional technology internship created to test the student scenario. This is not a real listing or application.",
+    "country": "FR",
+    "category": "internship",
+    "deadline": "2099-12-31",
+    "interests": [
+      "technology"
+    ],
+    "eligibility": {
+      "description": "Fictional requirements: ages 18-30, undergraduate student, no citizenship country restriction. No claim is made about visas or work authorization.",
+      "min_age": 18,
+      "max_age": 30,
+      "countries": [],
+      "education_levels": [
+        "undergraduate"
+      ]
+    },
+    "source_url": "https://example.org/mock/software-internship-fr",
+    "is_mock": true
+  }
+]

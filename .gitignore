@@ -1,0 +1,52 @@
+# Local configuration and secrets (templates must contain placeholders only)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials.json
+service-account*.json
+secrets.json
+secrets.yaml
+secrets.yml
+.secrets/
+.aws/
+.ssh/
+
+# Python environments and caches
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.tox/
+.nox/
+
+# Build, test, and runtime output
+build/
+dist/
+*.egg-info/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+junit.xml
+*.log
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+
+# Local editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
